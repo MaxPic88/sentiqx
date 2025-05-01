@@ -93,7 +93,7 @@
       <textarea name="message" required placeholder="Your message..." class="w-full border p-4 rounded text-sm" rows="4"></textarea>
       <button type="submit" class="w-full sm:w-auto px-6 py-3 bg-orange-500 text-white font-semibold rounded hover:bg-orange-600">Send</button>
     </form>
-<p id="formSuccess" class="text-green-600 font-semibold mt-4 hidden">✅ Your message has been sent!</p>
+<p id="formSuccess" class="text-green-600 font-semibold mt-4 hidden"></p>
 
 
   </section>
@@ -116,7 +116,8 @@
         feature3_title: "Analytics & Dashboard",
         feature3_desc: "Track bookings, clients, and optimize your workload",
         pricing_title: "Pricing Plans",
-        contact_title: "Get in Touch"
+        contact_title: "Get in Touch",
+        form_success: "✅ Your message has been sent!"
       },
       ru: {
         title: "Умные боты для записи",
@@ -129,7 +130,8 @@
         feature3_title: "Аналитика и панель",
         feature3_desc: "Анализируй загрузку, клиентов и эффективность",
         pricing_title: "Тарифные планы",
-        contact_title: "Связаться с нами"
+        contact_title: "Связаться с нами",
+        form_success: "✅ Ваше сообщение отправлено!"
       },
       lv: {
         title: "Viedie rezervācijas roboti",
@@ -142,7 +144,8 @@
         feature3_title: "Analītika un panelis",
         feature3_desc: "Pārskati pierakstus, klientus un noslodzi",
         pricing_title: "Cenu plāni",
-        contact_title: "Sazinieties ar mums"
+        contact_title: "Sazinieties ar mums",
+        form_success: "✅ Jūsu ziņa ir nosūtīta!"
       }
     };
 
@@ -184,6 +187,8 @@ document.getElementById("contactForm").addEventListener("submit", async function
 
   if (response.ok) {
     form.reset();
+    const lang = localStorage.getItem("lang") || "en"; 
+    document.getElementById("formSuccess").textContent = translations[lang].form_success; 
     document.getElementById("formSuccess").classList.remove("hidden");
   } else {
     alert("❌ Something went wrong. Please try again.");
