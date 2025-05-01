@@ -18,6 +18,11 @@ try {
     $mail->SMTPSecure = 'tls'; // или ssl
     $mail->Port = 587; // или 465 для ssl
 
+
+    // 💡 ВКЛЮЧАЕМ ОТЛАДКУ
+    $mail->SMTPDebug = 2;
+    $mail->Debugoutput = 'html';
+    
     // От кого и кому
     $mail->setFrom('info@sentiqx.eu', 'SentiQX Site');
     $mail->addAddress('youremail@example.com'); // получатель
