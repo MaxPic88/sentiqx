@@ -1,5 +1,5 @@
 <?php
-ob_start(); // Включаем буферизацию вывода
+ob_start(); // буферизация вывода
 
 require 'PHPMailer/PHPMailer.php';
 require 'PHPMailer/SMTP.php';
@@ -19,24 +19,26 @@ try {
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
 
-    // ВКЛЮЧАЕМ ОТЛАДКУ
+    // ОТЛАДКА
     $mail->SMTPDebug = 2;
     $mail->Debugoutput = 'html';
 
-    $mail->setFrom('info@sentiqx.eu', 'SentiQX Site');
-    $mail->addAddress('youremail@example.com');
+    // От кого и кому
+    $mail->setFrom('info@sentiqx.eu', 'SentiQX Website');
+    $mail->addAddress('sentiqx@gmail.com'); // <-- замени на свою почту
 
+    // Письмо
     $mail->isHTML(true);
     $mail->Subject = 'New message from SentiQX';
-    $mail->Body    = 'Email: ' . $_POST['email'] . '<br>Message:<br>' . nl2br($_POST['message']);
+    $mail->Body = 'Email: ' . $_POST['email'] . '<br><br>Message:<br>' . nl2br($_POST['message']);
 
     $mail->send();
-    echo '✅ Message has been sent';
+    echo '✅ Message sent successfully.';
 } catch (Exception $e) {
-    echo "❌ Message could not be sent. Error: {$mail->ErrorInfo}";
+    echo "❌ Failed to send. Error: {$mail->ErrorInfo}";
 }
 
-// ПОКАЗЫВАЕМ ВЕСЬ ОТЛАДОЧНЫЙ ВЫВОД
-echo '<hr><h3>Debug log:</h3>';
+// Показываем debug log
+echo '<hr><h3>📄 SMTP Debug Output:</h3>';
 echo nl2br(ob_get_clean());
 ?>
