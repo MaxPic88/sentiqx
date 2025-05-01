@@ -5,12 +5,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SentiQX — Smart Booking Bots</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    const translations = {
+      en: {
+        title: "Smart Booking Bots",
+        subtitle: "Automate scheduling, save time, and grow your business via WhatsApp",
+        features_title: "Why Choose SentiQX?",
+        feature1_title: "WhatsApp Booking",
+        feature1_desc: "Clients can book appointments anytime through chat",
+        feature2_title: "Google Calendar Sync",
+        feature2_desc: "Keep your team organized with automatic calendar events",
+        feature3_title: "Analytics & Dashboard",
+        feature3_desc: "Track bookings, clients, and optimize your workload",
+        pricing_title: "Pricing Plans",
+        contact_title: "Get in Touch"
+      },
+      ru: {
+        title: "Умные боты для записи",
+        subtitle: "Автоматизируй запись, экономь время и развивай бизнес через WhatsApp",
+        features_title: "Почему SentiQX?",
+        feature1_title: "Запись в WhatsApp",
+        feature1_desc: "Клиенты записываются в любое время через чат",
+        feature2_title: "Синхронизация с Google Календарём",
+        feature2_desc: "Удобная организация работы команды и мастеров",
+        feature3_title: "Аналитика и панель",
+        feature3_desc: "Анализируй загрузку, клиентов и эффективность",
+        pricing_title: "Тарифные планы",
+        contact_title: "Связаться с нами"
+      },
+      lv: {
+        title: "Viedie rezervācijas roboti",
+        subtitle: "Automatizē grafiku, ietaupi laiku un audz savu biznesu ar WhatsApp",
+        features_title: "Kāpēc SentiQX?",
+        feature1_title: "Rezervēšana WhatsApp",
+        feature1_desc: "Klienti var rezervēt jebkurā laikā caur čatu",
+        feature2_title: "Google Kalendāra sinhronizācija",
+        feature2_desc: "Automātiska notikumu pārvaldība komandai",
+        feature3_title: "Analītika un panelis",
+        feature3_desc: "Pārskati pierakstus, klientus un noslodzi",
+        pricing_title: "Cenu plāni",
+        contact_title: "Sazinieties ar mums"
+      }
+    };
+
+    function changeLang(lang) {
+      const t = translations[lang];
+      for (const id in t) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = t[id];
+      }
+    }
+  </script>
 </head>
 <body class="bg-white text-gray-800 font-sans">
 
   <!-- Header -->
   <header class="flex flex-col md:flex-row items-center justify-between p-4 md:p-6 shadow-md gap-4">
-    <img src="/static/logo-white-bg.png" alt="SentiQX Logo" class="h-20 w-auto">
+    <img src="/static/logo-white-bg.png" alt="SentiQX Logo" class="h-24 w-auto">
     <nav class="flex flex-wrap items-center gap-4 text-sm">
       <a href="#features" class="hover:underline">Features</a>
       <a href="#pricing" class="hover:underline">Pricing</a>
@@ -90,17 +141,6 @@
   <footer class="text-center p-6 text-sm text-gray-500">
     &copy; 2025 SentiQX LTD. All rights reserved.
   </footer>
-
-  <script>
-    const translations = { ... }; // тот же блок переводов, оставим без изменений
-
-    function changeLang(lang) {
-      const t = translations[lang];
-      for (const id in t) {
-        document.getElementById(id).textContent = t[id];
-      }
-    }
-  </script>
 
 </body>
 </html>
