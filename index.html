@@ -87,13 +87,13 @@
   <!-- Contact Form -->
   <section id="contact" class="py-16 px-6 md:px-16 text-center">
     <h2 class="text-3xl font-bold mb-8" id="contact_title">Get in Touch</h2>
-    <form action="https://formspree.io/f/meogeyyr" method="POST" class="max-w-xl mx-auto space-y-4">
+    <form id="contactForm" class="max-w-xl mx-auto space-y-4">
       <input type="text" name="name" required placeholder="Your name" class="w-full border p-4 rounded text-sm">
       <input type="email" name="email" required placeholder="Your email" class="w-full border p-4 rounded text-sm">
       <textarea name="message" required placeholder="Your message..." class="w-full border p-4 rounded text-sm" rows="4"></textarea>
       <button type="submit" class="w-full sm:w-auto px-6 py-3 bg-orange-500 text-white font-semibold rounded hover:bg-orange-600">Send</button>
     </form>
-
+<p id="formSuccess" class="text-green-600 font-semibold mt-4 hidden">✅ Your message has been sent!</p>
 
 
   </section>
@@ -167,6 +167,30 @@
     applyLang(lang);
   });
   </script>
+
+  <script>
+document.getElementById("contactForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const formData = new FormData(form);
+  const formObject = Object.fromEntries(formData.entries());
+
+  const response = await fetch("https://formspree.io/f/meogeyyr", {
+    method: "POST",
+    headers: { "Accept": "application/json" },
+    body: formData
+  });
+
+  if (response.ok) {
+    form.reset();
+    document.getElementById("formSuccess").classList.remove("hidden");
+  } else {
+    alert("❌ Something went wrong. Please try again.");
+  }
+});
+</script>
+
   
 </body>
 </html>
