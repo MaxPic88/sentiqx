@@ -1,25 +1,35 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $to = "info@sentiqx.eu"; // куда ты получаешь сообщение
-  $from = $_POST["email"];
-  $message = $_POST["message"];
-  $subject = "New message from SentiQX";
+require 'PHPMailer/PHPMailer.php';
+require 'PHPMailer/SMTP.php';
+require 'PHPMailer/Exception.php';
 
-  $headers = "From: $from\r\n";
-  $headers .= "Reply-To: $from\r\n";
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-  // Отправка тебе
-  mail($to, $subject, $message, $headers);
+$mail = new PHPMailer(true);
 
-  // Автоответ клиенту
-  $reply_subject = "Thank you for contacting SentiQX";
-  $reply_message = "Hello,\n\nThank you for reaching out to SentiQX.\nWe have received your message and will get back to you soon.\n\nBest,\nThe SentiQX Team";
-  $reply_headers = "From: info@sentiqx.eu\r\n";
+try {
+    // Настройки SMTP
+    $mail->isSMTP();
+    $mail->Host = 'smtp.nl.zone.eu'; // например, smtp.zoho.com, smtp.office365.com
+    $mail->SMTPAuth = true;
+    $mail->Username = 'info@sentiqx.eu';
+    $mail->Password = 'Mak5imka21!!';
+    $mail->SMTPSecure = 'tls'; // или ssl
+    $mail->Port = 587; // или 465 для ssl
 
-  mail($from, $reply_subject, $reply_message, $reply_headers);
+    // От кого и кому
+    $mail->setFrom('info@sentiqx.eu', 'SentiQX Site');
+    $mail->addAddress('youremail@example.com'); // получатель
 
-  echo "success";
-} else {
-  echo "error";
+    // Тема и тело письма
+    $mail->isHTML(true);
+    $mail->Subject = 'New message from SentiQX';
+    $mail->Body    = 'Email: ' . $_POST['email'] . '<br>Message:<br>' . nl2br($_POST['message']);
+
+    $mail->send();
+    echo 'Message has been sent';
+} catch (Exception $e) {
+    echo "Message could not be sent. Error: {$mail->ErrorInfo}";
 }
 ?>
